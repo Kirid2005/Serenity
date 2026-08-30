@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serenity - Поиск друзей для игр</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Serenity</h1>
+        <p>Поиск напарников и друзей для игры</p>
+    </header>
+    <main>
+        <section class="search">
+            <input type="text" placeholder="Введите игру" id="searchInput" />
+            <button onclick="search()">Поиск</button>
+        </section>
+        <section id="results" class="results">
+            <!-- Здесь будут появляться найденные напарники -->
+        </section>
+    </main>
+    <footer>
+        <p>Serenity © 2023</p>
+    </footer>
+
+    <script>
+        const data = [
+            {game: 'Dota 2', user: 'Игрок1'},
+            {game: 'Counter-Strike', user: 'Игрок2'},
+            {game: 'World of Warcraft', user: 'Игрок3'},
+            {game: 'Dota 2', user: 'Игрок4'},
+        ];
+
+        function search() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const results = data.filter(item => item.game.toLowerCase().includes(query));
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<p>Ничего не найдено.</p>';
+            } else {
+                results.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'result-item';
+                    div.textContent = `${item.user} - ${item.game}`;
+                    resultsContainer.appendChild(div);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
